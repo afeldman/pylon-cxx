@@ -33,7 +33,8 @@ fn main() {
     #[cfg(target_os = "linux")]
     {
         let pylon_root = std::env::var("PYLON_ROOT").unwrap_or_else(|_| "/opt/pylon".into());
-        println!("cargo:warning=PYLON_ROOT = {:?}", std::env::var("PYLON_ROOT"));
+
+        println!("cargo:warning=PYLON_ROOT = {:?}", pylon_root);
 
         let expected_major_version = match pylon_root.as_str() {
             "/opt/pylon5" => Some(5),
