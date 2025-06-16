@@ -32,15 +32,7 @@ fn main() {
 
     #[cfg(target_os = "linux")]
     {
-        let pylon_root = match std::env::var("PYLON_ROOT") {
-            Ok(val) => val,
-            Err(_) => match pylon_major_version {
-                Some(5) => "/opt/pylon5",
-                Some(6) | None => "/opt/pylon",
-                Some(version) => panic!("unsupported pylon version: {}", version),
-            }
-            .into(),
-        };
+        let pylon_root = std::env::var("PYLON_ROOT").unwrap_or_else(|_| "/opt/pylon".into());
 
         let expected_major_version = match pylon_root.as_str() {
             "/opt/pylon5" => Some(5),
